@@ -1,0 +1,3 @@
+pip
+rich
+pygame-ce
