@@ -8,9 +8,14 @@ def main() -> None:
 
     os.system(command="cls" if os.name == "nt" else "clear")
 
-    # Solution (1)
-    music_path = r"./music"
+    # Solution (0)
+    music_path = r".\music"
     print(f"music_path: '{music_path}'")
+    # /Solution (0)
+
+    # Solution (1)
+    # music_path = "./music"
+    # print(f"music_path: '{music_path}'")
     # /Solution (1)
 
     # Solution (2)
@@ -22,9 +27,9 @@ def main() -> None:
     # description: str = "You must specify the music path!"
     # parser = argparse.ArgumentParser(description=description)
     # parser.add_argument("music_path", help="Music Path")
-    # args = parser.parse_args()
+    # arguments = parser.parse_args()
 
-    # music_path: str = args.music_path
+    # music_path: str = arguments.music_path
     # print(f"music_path: '{music_path}'")
     # /Solution (3)
 
@@ -33,10 +38,10 @@ def main() -> None:
     # parser = argparse.ArgumentParser(description=description)
     # parser.add_argument("first_name", help="First Name")
     # parser.add_argument("last_name", help="Last Name")
-    # args = parser.parse_args()
+    # arguments = parser.parse_args()
 
-    # first_name: str = args.first_name
-    # last_name: str = args.last_name
+    # last_name: str = arguments.last_name
+    # first_name: str = arguments.first_name
 
     # full_name: str = f"Full Name: '{first_name} {last_name}'"
     # print(full_name)

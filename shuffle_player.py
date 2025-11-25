@@ -8,7 +8,7 @@ import random
 import argparse
 from rich import print
 
-VERSION: str = "1.0"
+VERSION: str = "1.1"
 
 
 def play_mp3_file(path: str, filename: str) -> None:
@@ -45,9 +45,9 @@ def main() -> None:
     description: str = "You must specify the music path!"
     parser = argparse.ArgumentParser(description=description)
     parser.add_argument("music_path", help="Music Path")
-    args = parser.parse_args()
+    arguments = parser.parse_args()
 
-    music_path: str = args.music_path
+    music_path: str = arguments.music_path
 
     if not os.path.exists(path=music_path):
         print(f"[-] Music path: '{music_path}' not found!\n")
@@ -72,7 +72,7 @@ def main() -> None:
     while True:
         random.shuffle(x=mp3_files)
 
-        print(f"----- DT Music Player {VERSION} (Song Count: {len(mp3_files)}) -----\n")
+        print(f"# DT Music Shuffle Player {VERSION} (Song Count: {len(mp3_files)})\n")
 
         for index, song_filename in enumerate(mp3_files, start=1):
             index_string = f"{index}".rjust(3, " ")

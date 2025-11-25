@@ -1,5 +1,5 @@
 """
-DT Music Player
+DT Music Single Player
 """
 
 import os
@@ -75,9 +75,9 @@ def main() -> None:
     while True:
         print("\n----- DT Music Player -----\n")
 
-        for index, song in enumerate(mp3_files):
+        for index, song_filename in enumerate(mp3_files):
             index_string = f"{index + 1}".rjust(3, " ")
-            print(f"[{index_string}]: {song}")
+            print(f"[{index_string}]: {song_filename}")
 
         prompt: str = "\nEnter a song number to play or 'q' to quit: "
         song_number: str = input(prompt).strip().lower()

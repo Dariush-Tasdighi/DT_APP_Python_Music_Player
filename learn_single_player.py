@@ -55,6 +55,7 @@ if __name__ == "__main__":
 #     #     if file.endswith(".mp3"):
 #     #         mp3_files.append(file)
 
+#     # NEW
 #     mp3_files: list[str] = [file for file in files if file.endswith(".mp3")]
 
 #     if len(mp3_files) == 0:

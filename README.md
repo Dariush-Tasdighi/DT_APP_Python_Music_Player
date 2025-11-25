@@ -75,4 +75,16 @@ deactivate
 python .\shuffle_player.py .\music
 ```
 
+```bash
+python .\shuffle_player.py ./music
+```
+
+```bash
+python .\shuffle_player.py ".\music"
+```
+
+```bash
+python .\shuffle_player.py "./music"
+```
+
 ---
