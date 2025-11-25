@@ -1,6 +1,6 @@
 # DT Music Player
 
-## This program was written by
+## This program was developed by the following people
 
 - **Dariush Tasdighi**
   - Cell Phone Number: 09121087461
@@ -14,7 +14,7 @@
   - Email Address: [HR.Hossein.Rouzbahani@Gmail.com](HR.Hossein.Rouzbahani@Gmail.com)
   - LinkedIn: [https://www.linkedin.com/in/hossein-rouzbahani](https://www.linkedin.com/in/hossein-rouzbahani)
 
----
+## Packages Used
 
 - 'rich' package:
   - [pypi.org](https://pypi.org/project/rich)
@@ -28,8 +28,6 @@
   - Extra:
     - [Site](https://pyga.me)
     - [Documents](https://pyga.me/docs)
-
----
 
 ## Setup Environment
 
@@ -69,6 +67,12 @@ Now! We Create / Modify / Delete / Run the Source Codes...
 
 ```bash
 deactivate
+```
+
+## Run Program
+
+```bash
+python .\shuffle_player.py .\music
 ```
 
 ---
