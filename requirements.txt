@@ -1,3 +1,4 @@
 pip
 rich
+readchar
 pygame-ce

@@ -2,86 +2,74 @@
 DT Music Player (Shuffle)
 """
 
-import os
-import pygame
-import random
 import argparse
+
+# NEW
+import random
+from typing import Final
+
+from dt_utility import (
+    clear_screen,
+    display_error_message,
+)
+
 from rich import print
+from pathlib import Path
+from typing import Iterator
 
-VERSION: str = "1.1"
+from dt_pathlib import check_path
+from dt_audio_player import play_audio_file
 
-
-def play_mp3_file(path: str, filename: str) -> None:
-    """Play mp3 file"""
-
-    file_path: str = os.path.join(path, filename)
-
-    if not os.path.exists(path=file_path):
-        print(f"[-] Music file: '{file_path}' not found!\n")
-        exit()
-
-    if not os.path.isfile(path=file_path):
-        print(f"[-] Music file: '{file_path}' not found!\n")
-        exit()
-
-    if not file_path.endswith(".mp3"):
-        print(f"[-] Music file: '{file_path}' is not a mp3 file!\n")
-        exit()
-
-    pygame.init()
-    pygame.mixer.init()
-    pygame.mixer.music.load(filename=file_path)
-    pygame.mixer.music.play()
-
-    while pygame.mixer.music.get_busy():
-        pygame.time.Clock().tick(10)
+# NEW
+VERSION: Final[str] = "2.0.0"
 
 
 def main() -> None:
-    """The main of program"""
+    """
+    Main function
+    """
 
-    os.system(command="cls" if os.name == "nt" else "clear")
+    clear_screen()
+    # print("=" * 50)
+
+    message: str
 
     description: str = "You must specify the music path!"
     parser = argparse.ArgumentParser(description=description)
     parser.add_argument("music_path", help="Music Path")
     arguments = parser.parse_args()
+    audio_path_str: str = arguments.music_path
+    audio_path_object = check_path(path=audio_path_str)
 
-    music_path: str = arguments.music_path
+    audio_files: Iterator[Path] = audio_path_object.glob(pattern="*.mp3")
+    audio_file_list: list[Path] = list(audio_files)
 
-    if not os.path.exists(path=music_path):
-        print(f"[-] Music path: '{music_path}' not found!\n")
-        exit()
-
-    if not os.path.isdir(s=music_path):
-        print(f"[-] Music path: '{music_path}' not found!\n")
-        exit()
-
-    files: list[str] = os.listdir(path=music_path)
-
-    if len(files) == 0:
-        print(f"[-] Music path: '{music_path}' is empty!\n")
-        exit()
-
-    mp3_files: list[str] = [file for file in files if file.endswith(".mp3")]
-
-    if len(mp3_files) == 0:
-        print(f"[-] Music path: '{music_path}' has no mp3 files!\n")
-        exit()
+    if len(audio_file_list) == 0:
+        message = f"The '{audio_path_object}' path is empty or has no 'mp3' files"
+        display_error_message(message=message)
+        return
 
     while True:
-        random.shuffle(x=mp3_files)
-
-        print(f"# DT Music Shuffle Player {VERSION} (Song Count: {len(mp3_files)})\n")
-
-        for index, song_filename in enumerate(mp3_files, start=1):
-            index_string = f"{index}".rjust(3, " ")
-
-            print(f"[{index_string}] Song is playing: '{song_filename}'", end=" ")
-            play_mp3_file(path=music_path, filename=song_filename)
-            print()
-
         print()
+        # NEW
+        print(f"[bold blue]<<<<< DT Music Player ({VERSION}) >>>>>[/bold blue]")
+        print()
+
+        # NEW
+        random.shuffle(x=audio_file_list)
+
+        # NEW
+        for index, audio_file_path in enumerate(audio_file_list, start=1):
+            print(f"{index:>3}: Playing: [green]{audio_file_path.name}[/green]", end=" ")
+            audio_file_path_string: str = str(audio_file_path)
+
+            play_audio_file(
+                notify=False,
+                controllable=True,
+                filename=audio_file_path_string,
+            )
+
+            print()
 
 
 if __name__ == "__main__":
@@ -91,7 +79,9 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         print()
 
-    except Exception as error:
-        print(f"[-] {error}!")
+    except Exception as exception:
+        display_error_message(message=str(exception))
 
-    print()
+    finally:
+        # print("=" * 50)
+        print()
