@@ -67,19 +67,11 @@ deactivate
 ## Run Program
 
 ```bash
-python .\shuffle_player.py .\music
+python .\single_player.py music
 ```
 
 ```bash
-python .\shuffle_player.py ./music
-```
-
-```bash
-python .\shuffle_player.py ".\music"
-```
-
-```bash
-python .\shuffle_player.py "./music"
+python .\shuffle_player.py music
 ```
 
 ---
